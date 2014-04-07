@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Ghostscript.NET</id>
+    <version>1.1.4</version>
+    <title>Ghostscript.NET</title>
+    <authors>Josip Habjan</authors>
+    <owners>Josip Habjan</owners>
+    <licenseUrl>http://ghostscriptnet.codeplex.com/license</licenseUrl>
+    <projectUrl>http://ghostscriptnet.codeplex.com/</projectUrl>
+    <iconUrl>http://c.fsdn.com/allura/p/ghostscriptnet/icon</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Ghostscript.NET (written in C#) is the most completed managed wrapper library around the Ghostscript library (32-bit &amp; 64-bit), an interpreter for the PostScript language, PDF, related software and documentation.</description>
+    <releaseNotes>Fixed problem with applying GraphicsAlphaBits and TextAlphaBits which improved antialiasing in GhostscriptViewer and GhostscriptRasterizer. Fixed problem with output through main stderr callback handler. Added support for MemoryStream in the GhostscriptPdfInfo.GetInkCoverage method. Added GraphicsAlphaBits and TextAlphaBits properties in GhostscriptViewer and GhostscriptRasterizer so antialiasing can now be changed from outside.</releaseNotes>
+    <copyright>Copyright (c) 2013-2014 by Josip Habjan</copyright>
+    <language />
+    <tags>.NET ghostscript pdf converson image</tags>
+  </metadata>
+</package>

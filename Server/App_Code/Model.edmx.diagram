@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="371bce6836474296ba7bff10afd3dcf7" Name="Diagram1">
+        <EntityTypeShape EntityType="EDFServerModel.SCEUsers" Width="1.5" PointX="2.875" PointY="1.625" />
+        <EntityTypeShape EntityType="EDFServerModel.Timetables" Width="1.5" PointX="8.375" PointY="1.25" />
+        <AssociationConnector Association="EDFServerModel.FK_SCEUsers_Timetables" />
+        <EntityTypeShape EntityType="EDFServerModel.EDFModules" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EDFServerModel.UserModules" Width="1.5" PointX="8" PointY="4.875" />
+        <AssociationConnector Association="EDFServerModel.FK_UserModules_EDFModules" />
+        <AssociationConnector Association="EDFServerModel.FK_UserModules_SCEUsers" />
+        <EntityTypeShape EntityType="EDFServerModel.AppUsage" Width="1.5" PointX="5.1676841644419751" PointY="4.9757867329641181" />
+        <EntityTypeShape EntityType="EDFServerModel.EDFUsage" Width="1.5" PointX="0.5" PointY="4" />
+        <AssociationConnector Association="EDFServerModel.FK_EDFUsage_EDFModules" />
+        <AssociationConnector Association="EDFServerModel.FK_EDFUsage_SCEUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

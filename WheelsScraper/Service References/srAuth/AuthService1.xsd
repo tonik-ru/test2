@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://web5.redcube.ru/EDFServer/AuthService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="AuthInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthResult" type="tns:AuthInfoResult" />
+      <xs:element minOccurs="0" name="Delay" type="xs:int" />
+      <xs:element minOccurs="0" name="EndTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="MaxSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxThread" type="xs:int" />
+      <xs:element minOccurs="0" name="Random" type="xs:int" />
+      <xs:element minOccurs="0" name="StartIn" type="ser:duration" />
+      <xs:element minOccurs="0" name="StartTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="TimeLeft" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthInfo" nillable="true" type="tns:AuthInfo" />
+  <xs:simpleType name="AuthInfoResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="APIKeyNotFound" />
+      <xs:enumeration value="UserIsBlocked" />
+      <xs:enumeration value="NotWorkingTime" />
+      <xs:enumeration value="NotAllowedModule" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuthInfoResult" nillable="true" type="tns:AuthInfoResult" />
+</xs:schema>

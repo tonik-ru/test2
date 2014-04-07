@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1c1c6fab-5860-4400-b6b4-25c10ff91a6d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/EDFServer/UpdaterService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UpdaterService.disco" MetadataType="Disco" ID="b651e6ce-d4ae-457f-81ba-18e732971922" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?disco" />
+    <MetadataFile FileName="UpdaterService.xsd" MetadataType="Schema" ID="49ad45c9-6977-42b8-852f-ac200ea9aaee" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UpdaterService1.xsd" MetadataType="Schema" ID="2869c0a3-3c4e-4a3a-96ed-888509b8be31" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UpdaterService2.xsd" MetadataType="Schema" ID="41109285-cafa-45b4-ac63-b89eb15a558c" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UpdaterService3.xsd" MetadataType="Schema" ID="2e8c5c58-d686-4242-9c4b-8ee6f7a7da9c" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UpdaterService.wsdl" MetadataType="Wsdl" ID="664468d9-2121-463e-9a86-5e2b7ae7dd8b" SourceId="1" SourceUrl="http://tonik-7.rc.ru/EDFServer/UpdaterService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

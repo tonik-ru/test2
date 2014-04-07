@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EDFServerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EDFServerModelStoreContainer">
+          <EntitySet Name="AppUsage" EntityType="EDFServerModel.Store.AppUsage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EDFModules" EntityType="EDFServerModel.Store.EDFModules" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EDFUsage" EntityType="EDFServerModel.Store.EDFUsage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SCEUsers" EntityType="EDFServerModel.Store.SCEUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Timetables" EntityType="EDFServerModel.Store.Timetables" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserModules" EntityType="EDFServerModel.Store.UserModules" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_EDFUsage_EDFModules" Association="EDFServerModel.Store.FK_EDFUsage_EDFModules">
+            <End Role="EDFModules" EntitySet="EDFModules" />
+            <End Role="EDFUsage" EntitySet="EDFUsage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EDFUsage_SCEUsers" Association="EDFServerModel.Store.FK_EDFUsage_SCEUsers">
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+            <End Role="EDFUsage" EntitySet="EDFUsage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCEUsers_Timetables" Association="EDFServerModel.Store.FK_SCEUsers_Timetables">
+            <End Role="Timetables" EntitySet="Timetables" />
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserModules_EDFModules" Association="EDFServerModel.Store.FK_UserModules_EDFModules">
+            <End Role="EDFModules" EntitySet="EDFModules" />
+            <End Role="UserModules" EntitySet="UserModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserModules_SCEUsers" Association="EDFServerModel.Store.FK_UserModules_SCEUsers">
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+            <End Role="UserModules" EntitySet="UserModules" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="25" />
+          <Property Name="ResultCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EDFModules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="EDFUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="WorkTime" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCEUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SCEAPIKey" Type="varchar" MaxLength="50" />
+          <Property Name="TimetableID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timetables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="MaxThreads" Type="int" Nullable="false" />
+          <Property Name="MaxSeconds" Type="int" Nullable="false" />
+          <Property Name="Delay" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserModules">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EDFUsage_EDFModules">
+          <End Role="EDFModules" Type="EDFServerModel.Store.EDFModules" Multiplicity="1" />
+          <End Role="EDFUsage" Type="EDFServerModel.Store.EDFUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDFModules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EDFUsage">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EDFUsage_SCEUsers">
+          <End Role="SCEUsers" Type="EDFServerModel.Store.SCEUsers" Multiplicity="1" />
+          <End Role="EDFUsage" Type="EDFServerModel.Store.EDFUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCEUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EDFUsage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCEUsers_Timetables">
+          <End Role="Timetables" Type="EDFServerModel.Store.Timetables" Multiplicity="1" />
+          <End Role="SCEUsers" Type="EDFServerModel.Store.SCEUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetables">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SCEUsers">
+              <PropertyRef Name="TimetableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserModules_EDFModules">
+          <End Role="EDFModules" Type="EDFServerModel.Store.EDFModules" Multiplicity="1" />
+          <End Role="UserModules" Type="EDFServerModel.Store.UserModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDFModules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserModules_SCEUsers">
+          <End Role="SCEUsers" Type="EDFServerModel.Store.SCEUsers" Multiplicity="1" />
+          <End Role="UserModules" Type="EDFServerModel.Store.UserModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCEUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserModules">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EDFServerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EDFServerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SCEUsers" EntityType="EDFServerModel.SCEUsers" />
+          <EntitySet Name="Timetables" EntityType="EDFServerModel.Timetables" />
+          <AssociationSet Name="FK_SCEUsers_Timetables" Association="EDFServerModel.FK_SCEUsers_Timetables">
+            <End Role="Timetables" EntitySet="Timetables" />
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+          </AssociationSet>
+          <EntitySet Name="EDFModules" EntityType="EDFServerModel.EDFModules" />
+          <EntitySet Name="UserModules" EntityType="EDFServerModel.UserModules" />
+          <AssociationSet Name="FK_UserModules_EDFModules" Association="EDFServerModel.FK_UserModules_EDFModules">
+            <End Role="EDFModules" EntitySet="EDFModules" />
+            <End Role="UserModules" EntitySet="UserModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserModules_SCEUsers" Association="EDFServerModel.FK_UserModules_SCEUsers">
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+            <End Role="UserModules" EntitySet="UserModules" />
+          </AssociationSet>
+          <EntitySet Name="AppUsage" EntityType="EDFServerModel.AppUsage" />
+          <EntitySet Name="EDFUsage" EntityType="EDFServerModel.EDFUsage" />
+          <AssociationSet Name="FK_EDFUsage_EDFModules" Association="EDFServerModel.FK_EDFUsage_EDFModules">
+            <End Role="EDFModules" EntitySet="EDFModules" />
+            <End Role="EDFUsage" EntitySet="EDFUsage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EDFUsage_SCEUsers" Association="EDFServerModel.FK_EDFUsage_SCEUsers">
+            <End Role="SCEUsers" EntitySet="SCEUsers" />
+            <End Role="EDFUsage" EntitySet="EDFUsage" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SCEUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SCEAPIKey" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TimetableID" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Timetables" Relationship="EDFServerModel.FK_SCEUsers_Timetables" FromRole="SCEUsers" ToRole="Timetables" />
+          <NavigationProperty Name="UserModules" Relationship="EDFServerModel.FK_UserModules_SCEUsers" FromRole="SCEUsers" ToRole="UserModules" />
+          <NavigationProperty Name="EDFUsage" Relationship="EDFServerModel.FK_EDFUsage_SCEUsers" FromRole="SCEUsers" ToRole="EDFUsage" />
+        </EntityType>
+        <EntityType Name="Timetables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EndTime" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="MaxThreads" Nullable="false" />
+          <NavigationProperty Name="SCEUsers" Relationship="EDFServerModel.FK_SCEUsers_Timetables" FromRole="Timetables" ToRole="SCEUsers" />
+          <Property Type="Int32" Name="MaxSeconds" Nullable="false" />
+          <Property Type="Int32" Name="Delay" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SCEUsers_Timetables">
+          <End Type="EDFServerModel.Timetables" Role="Timetables" Multiplicity="1" />
+          <End Type="EDFServerModel.SCEUsers" Role="SCEUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetables">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SCEUsers">
+              <PropertyRef Name="TimetableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EDFModules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserModules" Relationship="EDFServerModel.FK_UserModules_EDFModules" FromRole="EDFModules" ToRole="UserModules" />
+          <NavigationProperty Name="EDFUsage" Relationship="EDFServerModel.FK_EDFUsage_EDFModules" FromRole="EDFModules" ToRole="EDFUsage" />
+        </EntityType>
+        <EntityType Name="UserModules">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="ModuleId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="EDFModules" Relationship="EDFServerModel.FK_UserModules_EDFModules" FromRole="UserModules" ToRole="EDFModules" />
+          <NavigationProperty Name="SCEUsers" Relationship="EDFServerModel.FK_UserModules_SCEUsers" FromRole="UserModules" ToRole="SCEUsers" />
+        </EntityType>
+        <Association Name="FK_UserModules_EDFModules">
+          <End Type="EDFServerModel.EDFModules" Role="EDFModules" Multiplicity="1" />
+          <End Type="EDFServerModel.UserModules" Role="UserModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDFModules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserModules_SCEUsers">
+          <End Type="EDFServerModel.SCEUsers" Role="SCEUsers" Multiplicity="1" />
+          <End Type="EDFServerModel.UserModules" Role="UserModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCEUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserModules">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AppUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ModuleId" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="IP" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ResultCode" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EDFUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ModuleId" Nullable="false" />
+          <Property Type="Int32" Name="WorkTime" Nullable="false" />
+          <NavigationProperty Name="EDFModules" Relationship="EDFServerModel.FK_EDFUsage_EDFModules" FromRole="EDFUsage" ToRole="EDFModules" />
+          <NavigationProperty Name="SCEUsers" Relationship="EDFServerModel.FK_EDFUsage_SCEUsers" FromRole="EDFUsage" ToRole="SCEUsers" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_EDFUsage_EDFModules">
+          <End Type="EDFServerModel.EDFModules" Role="EDFModules" Multiplicity="1" />
+          <End Type="EDFServerModel.EDFUsage" Role="EDFUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDFModules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EDFUsage">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EDFUsage_SCEUsers">
+          <End Type="EDFServerModel.SCEUsers" Role="SCEUsers" Multiplicity="1" />
+          <End Type="EDFServerModel.EDFUsage" Role="EDFUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCEUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EDFUsage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EDFServerModelStoreContainer" CdmEntityContainer="EDFServerEntities">
+          <EntitySetMapping Name="SCEUsers">
+            <EntityTypeMapping TypeName="EDFServerModel.SCEUsers">
+              <MappingFragment StoreEntitySet="SCEUsers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TimetableID" ColumnName="TimetableID" />
+                <ScalarProperty Name="SCEAPIKey" ColumnName="SCEAPIKey" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetables">
+            <EntityTypeMapping TypeName="EDFServerModel.Timetables">
+              <MappingFragment StoreEntitySet="Timetables">
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="MaxSeconds" ColumnName="MaxSeconds" />
+                <ScalarProperty Name="MaxThreads" ColumnName="MaxThreads" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDFModules">
+            <EntityTypeMapping TypeName="EDFServerModel.EDFModules">
+              <MappingFragment StoreEntitySet="EDFModules">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserModules">
+            <EntityTypeMapping TypeName="EDFServerModel.UserModules">
+              <MappingFragment StoreEntitySet="UserModules">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsage">
+            <EntityTypeMapping TypeName="EDFServerModel.AppUsage">
+              <MappingFragment StoreEntitySet="AppUsage">
+                <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDFUsage">
+            <EntityTypeMapping TypeName="EDFServerModel.EDFUsage">
+              <MappingFragment StoreEntitySet="EDFUsage">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
